@@ -2,7 +2,7 @@
 ICIP2019
 other codes pytorch version 0.4.1
 ## 1.generate features by TSN
-tsn-pytorch's pytorch version 0.3.1
+***Note: tsn-pytorch's pytorch version is 0.3.1***
 
 a.generate optical flow from video by nvidia-docker
 
