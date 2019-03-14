@@ -1,0 +1,3 @@
+[submodule "tsn-pytorch/tensorflow-model-zoo.torch"]
+	path = tsn-pytorch/tensorflow-model-zoo.torch
+	url = https://github.com/DQ0408/tensorflow-model-zoo.torch.git

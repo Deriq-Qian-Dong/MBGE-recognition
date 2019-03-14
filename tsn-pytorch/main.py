@@ -8,7 +8,6 @@ import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim
 from torch.nn.utils import clip_grad_norm
-
 from dataset import TSNDataSet
 from models import TSN
 from transforms import *
