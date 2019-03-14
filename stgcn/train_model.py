@@ -215,7 +215,7 @@ class REC_train():
             plt.pause(0.000001)
             if not os.path.exists('./%s_figs' % self.data_set_split_type):
                 os.makedirs('./%s_figs' % self.data_set_split_type)
-            plt.savefig('./%s_figs/%s.jpg' % (self.data_set_split_type, str(epoch).zfill(5)))
+            plt.savefig('./%s_figs/%s.png' % (self.data_set_split_type, str(epoch).zfill(5)))
             print('Done.')
         np.save('train_losses.npy', train_losses)
         np.save('train_accs.npy', train_accs)

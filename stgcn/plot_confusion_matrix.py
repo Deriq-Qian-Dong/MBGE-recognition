@@ -1,32 +1,24 @@
 # -*-coding:utf-8-*-
 from sklearn.metrics import confusion_matrix
 import matplotlib
-
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import MultipleLocator
+from optparse import OptionParser
 
-data_split_type = 'cv1'
-# jump，
-# happy jump，
-# squat，
-# sad squat，
-# throw，
-# angry throw，
-# stand，
-# surprised stand，
-# recede，
-# fearful recede，
-# turn，
-# disgusted turn
+optParser = OptionParser()
+optParser.add_option('-t', '--data_split_type', action='store', type="string", dest='data_split_type',
+                     help="data_split_type", default="cv2")
+option, args = optParser.parse_args()
+data_split_type = option.data_split_type
 labels = ['jump', 'happy jump', 'squat', 'sad squat', 'throw', 'angry throw', 'stand', 'surprised stand',
           'recede', 'fearful recede', 'turn', 'disgusted turn']
 lmap = [5, -4, 2, -1, -3, 1, 0, 6, 3, -5, 4, -2]
 # y_true代表真实的label值 y_pred代表预测得到的lavel值
-y_true = np.load('./%s_mfigs/y_true.npy' % data_split_type)
+y_true = np.load('./%s_y_true.npy' % data_split_type)
 
-y_pred = np.load('./%s_mfigs/y_pred.npy' % data_split_type)
+y_pred = np.load('./%s_y_pred.npy' % data_split_type)
 
 tick_marks = np.array(range(len(labels))) + 0.5
 
@@ -76,6 +68,6 @@ plt.gcf().subplots_adjust(bottom=0.15)
 
 plot_confusion_matrix(cm_normalized, title='normalized confusion matrix on %s of our model' % data_split_type)
 # show confusion matrix
-plt.savefig('./%s_mfigs/%s_confusion_matrix_sorted.svg' % (data_split_type, data_split_type), format='svg')
+plt.savefig('./%s_confusion_matrix_sorted.svg' % (data_split_type), format='svg')
 plt.show()
 print(data_split_type)
