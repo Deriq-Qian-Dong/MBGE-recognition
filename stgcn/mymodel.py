@@ -130,7 +130,7 @@ class REC_train():
     def __init__(self, data_split_type, base_lr=1e-4):
         self.data_split_type = data_split_type
         self.bsize = 128
-        self.dev = "cuda:2"
+        self.dev = "cuda:%d" % ngpu
         self.model = Model()
         self.model = self.model.to(self.dev)
         self.load_data()
@@ -221,7 +221,7 @@ class REC_train():
                     axs[i].legend(loc='best')
             plt.title("%s_fusion" % self.data_split_type)
             plt.pause(0.000001)
-            plt.savefig('./%s_mfigs/%s.jpg' % (self.data_split_type, str(epoch).zfill(5)))
+            plt.savefig('./%s_mfigs/%s.png' % (self.data_split_type, str(epoch).zfill(5)))
             print('Done.')
         # np.save('train_losses.npy', train_losses)
         # np.save('train_accs.npy', train_accs)
@@ -283,13 +283,20 @@ class REC_train():
 
     def load_data(self):
         self.Train_x, self.Train_y, self.Test_x, self.Test_y = get_all_data_from_txt(
-            './train_val_list/%s_train_list.txt' % self.data_split_type,
-            './train_val_list/%s_val_list.txt' % self.data_split_type, self.data_split_type)
+            '../tools/train_val_list/%s_train_list.txt' % self.data_split_type,
+            '../tools/train_val_list/%s_val_list.txt' % self.data_split_type, self.data_split_type)
 
 
 if __name__ == '__main__':
-    data_split_type = 'cs'
-    print("Training in ws by dq0...", data_split_type)
+    from optparse import OptionParser
+    optParser = OptionParser()
+    optParser.add_option('-t', '--data_split_type', action='store', type="string", dest='data_split_type',
+                         help="data_split_type", default="cv2")
+    optParser.add_option('-n', '--number_of_gpu', action='store', type="int", dest='number_of_gpu',
+                         help="the number of used gpu", default=0)
+    option, args = optParser.parse_args()
+    data_split_type = option.data_split_type
+    ngpu = option.number_of_gpu
     rec_train = REC_train(data_split_type)
     print(rec_train.bsize, rec_train.lr)
     rec_train.train()
