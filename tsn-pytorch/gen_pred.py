@@ -25,12 +25,15 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from optparse import OptionParser
 
-optParser = OptionParser()
-optParser.add_option('-t', '--data_split_type', action='store', type="string", dest='data_split_type',
-                     help="data_split_type", default="cv1")
-option, args = optParser.parse_args()
-data_split_type = option.data_split_type
-val_list = "./dq_tools/train_val_list/%s_val_list.txt" % data_split_type
+parser = argparse.ArgumentParser(
+    description="Standard video-level testing")
+parser.add_argument('--gpus', nargs='+', type=int, default=None)
+parser.add_argument('--data_split_type', action='store', default="cv2")
+args = parser.parse_args()
+workers = len(args.gpus)
+
+data_split_type = args.data_split_type
+val_list = "../tools/train_val_list/%s_val_list.txt" % data_split_type
 pretrained_model = "./%s_Flow_num_seg7_dropout_08_flow_model_best.pth.tar" % data_split_type
 num_segments = 7
 modality = "Flow"
@@ -41,11 +44,7 @@ batch_size = 1
 num_class = 12
 base_lr = 0.001
 dev = 2
-parser = argparse.ArgumentParser(
-    description="Standard video-level testing")
-parser.add_argument('--gpus', nargs='+', type=int, default=None)
-args = parser.parse_args()
-workers = len(args.gpus)
+
 
 net = TSN(num_class, num_segments, modality,
           base_model=arch,

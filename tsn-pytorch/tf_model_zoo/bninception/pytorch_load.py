@@ -6,7 +6,7 @@ import yaml
 
 
 class BNInception(nn.Module):
-    def __init__(self, model_path='model_zoo/bninception/bn_inception.yaml', num_classes=101,
+    def __init__(self, model_path='tf_model_zoo/bninception/bn_inception.yaml', num_classes=101,
                        weight_url='https://yjxiong.blob.core.windows.net/models/bn_inception-9f5701afb96c8044.pth'):
         super(BNInception, self).__init__()
 
