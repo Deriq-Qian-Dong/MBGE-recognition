@@ -114,13 +114,13 @@ class REC_train():
 
     def __init__(self, data_set_split_type, optimizer_type="Adam", base_lr=0.0001):
         graph_args = {'layout': 'openpose', 'strategy': 'spatial'}
-        PATH = "/home/dongqian/code/stgcn/models/kinetics-st_gcn.pt"
+        PATH = "models/kinetics-st_gcn.pt"
         self.data_set_split_type = data_set_split_type
         self.bsize = 128
         self.model = Model(in_channels=3, num_class=400, edge_importance_weighting=True,
                            graph_args=graph_args)
         self.model.load_state_dict(torch.load(PATH))
-        self.dev = "cuda:3"
+        self.dev = "cuda:%d" % ngpu
         self.model = self.model.to(self.dev)
         self.model.eval()
         # self.model.apply(weights_init)
@@ -295,13 +295,21 @@ class REC_train():
 
     def load_data(self):
         self.Train_x, self.Train_y, self.Test_x, self.Test_y = get_all_data_from_txt(
-            './train_val_list/%s_train_list.txt' % self.data_set_split_type,
-            './train_val_list/%s_val_list.txt' % self.data_set_split_type)
+            '../tools/train_val_list/%s_train_list.txt' % self.data_set_split_type,
+            '../tools/train_val_list/%s_val_list.txt' % self.data_set_split_type)
 
 
 if __name__ == "__main__":
-    print("Training in ws by dq cv2...")
-    rec_train = REC_train(data_set_split_type="cv2")
-    print(rec_train.bsize, rec_train.base_lr)
+    from optparse import OptionParser
+
+    optParser = OptionParser()
+    optParser.add_option('-t', '--data_split_type', action='store', type="string", dest='data_split_type',
+                         help="data_split_type", default="cv2")
+    optParser.add_option('-n', '--number_of_gpu', action='store', type="int", dest='number_of_gpu',
+                         help="the number of used gpu", default=0)
+    option, args = optParser.parse_args()
+    data_split_type = option.data_split_type
+    ngpu = option.number_of_gpu
+    rec_train = REC_train(data_set_split_type=data_split_type)
     rec_train.train_model_trans()
-    print('cv2')
+    print(data_split_type)
