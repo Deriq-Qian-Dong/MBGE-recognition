@@ -6,6 +6,7 @@ Created on 2018/12/21 20:42
 """
 import os
 from optparse import OptionParser
+
 optParser = OptionParser()
 optParser.add_option('-r', '--root_path', action='store', type="string", dest='root_path',
                      help="read videos' root path", default="../dataset/MBGE_dataset")
@@ -14,6 +15,8 @@ optParser.add_option('-o', '--out_path', action='store', type="string", dest='ou
 option, args = optParser.parse_args()
 root_path = option.root_path
 out_path = option.out_path
+if not os.path.exists(out_path):
+    os.makedirs(out_path)
 while True:
     all_names = set(os.listdir(root_path))
     done_names = set(os.listdir(out_path))
@@ -28,11 +31,11 @@ while True:
             if "csv" in v_name:
                 continue
             f_name = os.path.join(root, v_name)
-            label = out_path + f_name.replace(root_path, '').replace('.avi', '') + '/'
+            label = os.path.join(out_path, f_name.replace(root_path, '').replace('.avi', ''))
             print(label)
             print(f_name)
             if not os.path.exists(label):
                 os.makedirs(label)
             os.system(
                 "./build/examples/openpose/openpose.bin --video %s --display 0 --num_gpu 1 --num_gpu_start 0 --write_json %s --write_video %s" % (
-                    f_name, label, label + 'result.avi'))
+                    f_name, label, os.path.join(label, 'result.avi')))
