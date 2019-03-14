@@ -1,13 +1,16 @@
 # -*-coding:utf-8-*-
 from sklearn.metrics import confusion_matrix
 import matplotlib
-
+import argparse
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import MultipleLocator
-
-data_split_type = 'cv1'
+parser = argparse.ArgumentParser(
+    description="Standard video-level testing")
+parser.add_argument('--data_split_type', action='store', default="cv2")
+args = parser.parse_args()
+data_split_type = args.data_split_type
 # jump，
 # happy jump，
 # squat，
