@@ -68,19 +68,27 @@ class Model_to_train(nn.Module):
 
 
 def load_data(data_split_type):
-    return get_all_data_from_txt('./train_val_list/%s_train_list.txt' % data_split_type,
-                                 './train_val_list/%s_val_list.txt' % data_split_type, flist=True)
+    return get_all_data_from_txt('../tools/train_val_list/%s_train_list.txt' % data_split_type,
+                                 '../tools/train_val_list/%s_val_list.txt' % data_split_type, flist=True)
 
 
 if __name__ == "__main__":
-    data_split_type = 'cv2'
+    from optparse import OptionParser
+    optParser = OptionParser()
+    optParser.add_option('-t', '--data_split_type', action='store', type="string", dest='data_split_type',
+                         help="data_split_type", default="cv2")
+    optParser.add_option('-n', '--number_of_gpu', action='store', type="int", dest='number_of_gpu',
+                         help="the number of used gpu", default=0)
+    option, args = optParser.parse_args()
+    data_split_type = option.data_split_type
+    ngpu = option.number_of_gpu
     print('generate feature.', data_split_type)
     graph_args = {'layout': 'openpose', 'strategy': 'spatial'}
-    PATH = "/home/dongqian/code/stgcn/models/kinetics-st_gcn.pt"
+    PATH = "models/kinetics-st_gcn.pt"
     net1 = Model(in_channels=3, num_class=400, edge_importance_weighting=True,
                  graph_args=graph_args)
     net1.load_state_dict(torch.load(PATH))
-    dev = "cuda:1"
+    dev = "cuda:%d" % ngpu
     net1 = net1.to(dev)
     net2 = torch.load("mydataset_%s_model_best.pkl" % data_split_type, map_location=dev)
     print('model load success')
@@ -95,10 +103,10 @@ if __name__ == "__main__":
         output = net1(data)
         feature = net2(output)
         feature = feature.data.cpu().numpy().copy().reshape(1024)
-        print(train_list[i])
         if not os.path.exists(train_list[i].replace('keypoints', '%s_features' % data_split_type)):
             os.makedirs(train_list[i].replace('keypoints', '%s_features' % data_split_type))
         out = os.path.join(train_list[i].replace('keypoints', '%s_features' % data_split_type), 'st-gcn-feature.npy')
+        print(out)
         np.save(out, feature)
     for i, x in enumerate(Test_x):
         x = np.array([x])
@@ -108,8 +116,8 @@ if __name__ == "__main__":
         output = net1(data)
         feature = net2(output)
         feature = feature.data.cpu().numpy().copy().reshape(1024)
-        print(val_list[i])
         if not os.path.exists(val_list[i].replace('keypoints', '%s_features' % data_split_type)):
             os.makedirs(val_list[i].replace('keypoints', '%s_features' % data_split_type))
         out = os.path.join(val_list[i].replace('keypoints', '%s_features' % data_split_type), 'st-gcn-feature.npy')
+        print(out)
         np.save(out, feature)

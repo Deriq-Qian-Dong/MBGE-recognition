@@ -13,8 +13,7 @@ import os
 import time
 import sys
 
-root_path = r"/data5/dongqian/keypoints"
-# root_path = '/home/dongqian/code/stgcn/data'
+root_path = r"../dataset/keypoints"
 
 def json_pack(snippets_dir, frame_width=1280, frame_height=720, label='unknown', label_index=-1):
     sequence_info = []
@@ -120,8 +119,8 @@ def get_all_data_from_txt(t, v, flist=False):
     fv_lines = open(v).readlines()
     # /data/zqs/data/frames/zhengzegeng/bla3/169.254.32.6_12_06_09_35_07_record/01-jump 25 6
     # /data5/dongqian/keypoints/chenhongyu/bla2/169.254.32.10_12_11_15_37_20_record/01-angry_throw
-    ft_lines = [line.strip().replace("/data/zqs/data/optical_flow_data", root_path).split(' ') for line in ft_lines]
-    fv_lines = [line.strip().replace("/data/zqs/data/optical_flow_data", root_path).split(' ') for line in
+    ft_lines = [line.strip().replace("../dataset/optical_flow_data", root_path).split(' ') for line in ft_lines]
+    fv_lines = [line.strip().replace("../dataset/optical_flow_data", root_path).split(' ') for line in
                 fv_lines]
     X_train = []
     y_train = []
