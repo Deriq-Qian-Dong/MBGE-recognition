@@ -79,7 +79,7 @@ ICIP2019
 >```cd stgcn```
 >>```python mymodel.py --data_split_type cv1 --number_of_gpu 0```
 
-<div align=center><img width="800" height="800" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/cv1%E7%9F%A9%E9%98%B5.png"/></div>
+<div align=center><img width="400" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/cv1%E7%9F%A9%E9%98%B5.png"/></div>
 
 <div align=center>Fig3.The confusion matrix of our approach on cv1</div>
 
@@ -87,6 +87,6 @@ ICIP2019
 
 <div align=center>Fig4.Category and overall accuracies of our approach on cross-view1</div>
 
-<div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94.png"/></div>
+<div align=center><img width="400" height="200" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94.png"/></div>
 
 <div align=center>Fig5.The overall accuracies of TSN, ST-GCN and our approach</div>
