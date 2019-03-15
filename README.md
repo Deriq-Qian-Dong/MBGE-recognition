@@ -5,6 +5,7 @@ ICIP2019
 
 <div align=center>Fig1.The body gestures in MBGD</div>
 
+
 <div align=center><img width="800" height="250" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%B5%81%E7%A8%8B%E5%9B%BE.png"/></div>
 
 <div align=center>Fig2.Pipeline of our approach</div>
@@ -83,10 +84,12 @@ ICIP2019
 
 <div align=center>Fig3.The confusion matrix of our approach on cv1</div>
 
+
 <div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/cv1%E5%AF%B9%E6%AF%94.png"/></div>
 
 <div align=center>Fig4.Category and overall accuracies of our approach on cross-view1</div>
 
-<div align=center><img width="400" height="200" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94.png"/></div>
+
+<div align=center><img width="600" height="200" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94.png"/></div>
 
 <div align=center>Fig5.The overall accuracies of TSN, ST-GCN and our approach</div>
