@@ -5,7 +5,7 @@ ICIP2019
 
 <div align=center>Fig1.The body gestures in MBGD</div>
 
-<div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%B5%81%E7%A8%8B%E5%9B%BE.png"/></div>
+<div align=center><img width="800" height="250" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%B5%81%E7%A8%8B%E5%9B%BE.png"/></div>
 
 <div align=center>Fig2.Pipeline of our approach</div>
 
