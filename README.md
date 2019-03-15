@@ -4,8 +4,10 @@ ICIP2019
 ***Note: tsn-pytorch's pytorch version is 0.3.1***
 
 **a.generate optical flow from video by nvidia-docker**
-
 >sudo nvidia-docker run -it -v **absolute path to dataset**:/data bitxiong/tsn:latest bash
+
+>docker image can be download from [DockerHub](https://hub.docker.com/r/bitxiong/tsn)
+
 >>cp /data/build_of.py ./tools/
 
 >>python ./tools/build_of.py /data/video/ /data/optical_flow_data/
