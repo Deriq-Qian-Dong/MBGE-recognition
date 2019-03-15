@@ -1,7 +1,7 @@
 # MBGE-recognition
 ICIP2019
 
-<div align=center><img width="400" height="150" alt="The body gestures in MBGD" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.png"/></div>
+<div align=center><img width="800" height="300" alt="The body gestures in MBGD" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.png"/></div>
 
 ## 1.generate features by TSN
 ***Note: tsn-pytorch's pytorch version is 0.3.1***
