@@ -1,10 +1,16 @@
 # MBGE-recognition
 ICIP2019
 
-<div align=center><img width="800" height="300" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.png"/></div>
+<div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D.png"/></div>
+
+<div align=center>Fig1.The body gestures in MBGD</div>
+
+<div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%B5%81%E7%A8%8B%E5%9B%BE.png"/></div>
+
+<div align=center>Fig2.Pipeline of our approach</div>
 
 ## 1.generate features by TSN
-***Note: tsn-pytorch's pytorch version is 0.3.1***
+***Note: tsn-pytorch's pytorch version is 0.3.1; This code was modified from yjxiong's [tsn-pytorch](https://github.com/yjxiong/tsn-pytorch)***
 
 **a.generate optical flow from video by nvidia-docker**
 >```nvidia-docker run -it -v **absolute path to dataset**:/data bitxiong/tsn:latest bash```
@@ -47,7 +53,7 @@ ICIP2019
 >>```python gen_features.py -t cv1 -m ./cv1_Flow_num_seg7_dropout_08_flow_model_best.pth.tar -g 0 -g 1```
  
 ## 2.generate features by ST-GCN
-***Note: ST-GCN's pytorch version is 0.4.1***
+***Note: ST-GCN's pytorch version is 0.4.1; This code was modified from yysijie's [st-gcn](https://github.com/yysijie/st-gcn)***
 
 **a.generate key points from video by OpenPose**
 
@@ -56,8 +62,8 @@ ICIP2019
 >```python gen-keypoint.py -r ~/dataset/video/ -o ~/dataset/keypoints```
 
 **b.train model**
-
->```python train_model.py --data_split_type cv1 --number_of_gpu 0```
+>```cd stgcn```
+>>```python train_model.py --data_split_type cv1 --number_of_gpu 0```
 
 **c.plot confusion matrix**
 
@@ -70,6 +76,17 @@ ICIP2019
 >```python gen_features.py --data_split_type cv1 --number_of_gpu 0```
 
 ## 3.trained by Residual-Fully-Connected-Network
+>```cd stgcn```
+>>```python mymodel.py --data_split_type cv1 --number_of_gpu 0```
 
->```python mymodel.py --data_split_type cv1 --number_of_gpu 0```
+<div align=center><img width="800" height="800" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/cv1%E7%9F%A9%E9%98%B5.png"/></div>
 
+<div align=center>Fig3.The confusion matrix of our approach on cv1</div>
+
+<div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/cv1%E5%AF%B9%E6%AF%94.png"/></div>
+
+<div align=center>Fig4.Category and overall accuracies of our approach on cross-view1</div>
+
+<div align=center><img width="800" height="400" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94.png"/></div>
+
+<div align=center>Fig5.The overall accuracies of TSN, ST-GCN and our approach</div>
