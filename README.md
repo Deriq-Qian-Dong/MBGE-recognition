@@ -93,3 +93,5 @@ ICIP2019
 <div align=center><img width="600" height="200" src="https://github.com/DQ0408/MBGE-recognition/blob/master/image/%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94.png"/></div>
 
 <div align=center>Fig5.The overall accuracies of TSN, ST-GCN and our approach</div>
+
+***Dataset is about 360G, if you need to download it, contact Zhijuan Shen with email: zj.shen@siat.ac.cn***
